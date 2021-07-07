@@ -2,8 +2,26 @@
 
 {% block content %}
 
-    <div style="height: 20rem; background-color: #eeeeee; margin: 2rem; border-radius: 1rem">
+    <style>
+
+        .test {
+            background-color: #ffbd41;
+            margin: 1rem;
+            height: 48px;
+            width: 48px;
+            border-radius: .5rem;
+        }
+
+    </style>
+
+    <div style="height: 20rem; background-color: #f8e4e4; margin: 2rem; border-radius: 1rem">
         <h1>Enjoy Your Freedom!</h1>
+
+        <div class="test" style="display: block">block</div>
+        <div class="test" style="display: inline">inline</div>
+        <div class="test" style="display: inline-block">inline-block</div>
+        <div class="test" style="display: none">none</div>
     </div>
+
 
 {% endblock %}
