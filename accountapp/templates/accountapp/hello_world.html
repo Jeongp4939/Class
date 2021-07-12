@@ -10,8 +10,9 @@
             <input type="submit" class="px-5 btn btn-dark">
         </form>
 
-        <h5>{{ hello_world_output.text }}</h5>
-
+        {% for hello_world in hello_world_list %}
+            <h5>{{ hello_world.text }}</h5>
+        {% endfor %}
     </div>
 
 
