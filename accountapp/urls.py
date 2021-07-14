@@ -11,7 +11,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(template_name='accountapp/login.html'),
          name='login'),
 
-    path('logout/', LogoutView.as_view()),
+    path('logout/', LogoutView.as_view(), name='logout'),
 
     path('create/', AccountCreateView.as_view(), name='create')    # as_view 클래스가 아닌 함수로서 가져와줌
 ]
