@@ -16,7 +16,7 @@ from accountapp.models import HelloWorld
 
 @login_required(login_url=reverse_lazy('accountapp:login'))
 def hello_world(request):
-    if request.method == 'POST':
+    if request.method == 'POST':  # POST CREATE DATA
 
         temp = request.POST.get('hello_world_input')
 
@@ -24,9 +24,10 @@ def hello_world(request):
         new_hello_world.text = temp
         new_hello_world.save()
 
-        return HttpResponseRedirect(reverse('accountapp:hello_world'))
+        return HttpResponseRedirect(reverse('accountapp:hello_world'))  # accountapp 의 hello_world 라는 앱으로 가라는 뜻
+
     else:
-        hello_world_list = HelloWorld.objects.all()
+        hello_world_list = HelloWorld.objects.all()  # sql의 셀렉트문 # GET VIEW DATA
         return render(request, 'accountapp/hello_world.html',
                       context={'hello_world_list': hello_world_list})
 
@@ -34,8 +35,10 @@ def hello_world(request):
 class AccountCreateView(CreateView):
     model = User
     form_class = UserCreationForm
-    success_url = reverse_lazy('accountapp:hello_world')  # django 에서 class와 fuction을 불러오는 방식이 달라 lazy를 써야함
     template_name = 'accountapp/create.html'
+
+    def get_success_url(self):
+        return reverse('accountapp:detail', kwargs={'pk': self.object.pk})  # object = target_user
 
 
 class AccountDetailView(DetailView):
@@ -53,13 +56,16 @@ class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountCreationForm
     context_object_name = 'target_user'
-    success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/update.html'
+
+    def get_success_url(self):
+        return reverse('accountapp:detail', kwargs={'pk': self.object.pk})  # object = target_user
+
 
 
 @method_decorator(has_ownership, 'get')
 @method_decorator(has_ownership, 'post')
-class AccountDeleteView(DeleteView):
+class AccountDeleteView(DeleteView):  # 탈퇴시엔 form이 필요 없으므로 일단 제외함
     model = User
     context_object_name = 'target_user'
     success_url = reverse_lazy('accountapp:hello_world')
