@@ -1,7 +1,7 @@
 from django.urls import path
 from django.views.generic import TemplateView
 
-from articleapp.views import ArticleCreationView, ArticleDetailView
+from articleapp.views import ArticleCreationView, ArticleDetailView, ArticleUpdateView
 
 urlpatterns = [
 
@@ -9,4 +9,5 @@ urlpatterns = [
 
     path('create/', ArticleCreationView.as_view(), name = 'create'),
     path('detail/<int:pk>', ArticleDetailView.as_view(), name='detail'),
+    path('update/<int:pk>', ArticleUpdateView.as_view(), name='update'),
 ]
