@@ -84,3 +84,6 @@ __pycache__/
 media/
 
 staticfiles/
+
+django_02_gcp
+django_02_gcp.pub
